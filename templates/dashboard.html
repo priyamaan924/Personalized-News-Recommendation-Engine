@@ -1,0 +1,130 @@
+
+{% extends "base.html" %}
+
+{% block title %}NewsAI | Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <!-- Welcome Section -->
+    <section class="welcome-section dashboard-hero">
+        <div class="welcome-content">
+            <span class="eyebrow">YOUR PERSONAL NEWS SPACE</span>
+            <h1>Good to see you, {{ current_user.username }} <span>👋</span></h1>
+            <p>Discover the latest stories selected around your interests.</p>
+        </div>
+
+        <form action="{{ url_for('main.search') }}" method="get" class="dashboard-search">
+            <input name="q" placeholder="Search news..." required>
+            <button class="button" type="submit">Search</button>
+        </form>
+    </section>
+
+    <!-- Categories -->
+    <section class="category-section dashboard-categories">
+        <div class="dashboard-section-heading">
+            <div>
+                <span class="eyebrow">BROWSE TOPICS</span>
+                <h2>Explore Categories</h2>
+            </div>
+        </div>
+
+        <div class="category-list">
+            <a class="category-chip {% if not selected_category %}active{% endif %}"
+               href="{{ url_for('main.dashboard') }}">All News</a>
+
+            {% for category in categories %}
+            <a class="category-chip {% if selected_category == category.id %}active{% endif %}"
+               href="{{ url_for('main.dashboard', category=category.id) }}">
+                {{ category.name }}
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Trending -->
+    <section class="news-section dashboard-news-section">
+        <div class="section-heading dashboard-section-heading">
+            <div>
+                <span class="eyebrow">POPULAR STORIES</span>
+                <h2>🔥 Trending on NewsAI</h2>
+                <p class="section-subtitle">Stories readers are engaging with.</p>
+            </div>
+        </div>
+
+        <div class="news-grid">
+            {% for article in trending %}
+                {% include "_article_card.html" %}
+            {% else %}
+                <div class="dashboard-empty">
+                    <span>🔥</span>
+                    <h3>No trending stories yet</h3>
+                    <p>Check back when readers start engaging with articles.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="news-section dashboard-news-section">
+        <div class="section-heading dashboard-section-heading">
+            <div>
+                <span class="eyebrow">MACHINE LEARNING PICKS</span>
+                <h2>Recommended for You</h2>
+                <p class="section-subtitle">News selected based on your interests.</p>
+            </div>
+
+            <a href="{{ url_for('main.interests') }}" class="dashboard-action-link">
+                Edit Interests <span>→</span>
+            </a>
+        </div>
+
+        <div class="news-grid">
+            {% for article in recommended %}
+                {% include "_article_card.html" %}
+            {% else %}
+                <div class="dashboard-empty">
+                    <span>✨</span>
+                    <h3>No recommendations found</h3>
+                    <p>Select more interests to get personalized news.</p>
+                    <a href="{{ url_for('main.interests') }}" class="button">
+                        Choose Interests
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Latest News -->
+    <section class="news-section dashboard-news-section">
+        <div class="section-heading dashboard-section-heading">
+            <div>
+                <span class="eyebrow">STAY UPDATED</span>
+                <h2>Latest News</h2>
+                <p class="section-subtitle">Fresh stories from the news feed.</p>
+            </div>
+
+            <form method="post" action="{{ url_for('main.refresh_news') }}">
+                <button class="button dashboard-refresh" type="submit">
+                    ↻ Refresh News
+                </button>
+            </form>
+        </div>
+
+        <div class="news-grid">
+            {% for article in latest %}
+                {% include "_article_card.html" %}
+            {% else %}
+                <div class="dashboard-empty">
+                    <span>📰</span>
+                    <h3>No articles found</h3>
+                    <p>Try another category or refresh the news feed.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

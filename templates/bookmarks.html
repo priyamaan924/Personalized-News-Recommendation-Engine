@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Bookmarks | NewsAI{% endblock %}
+{% block content %}<h1>Your bookmarks</h1><div class="grid">
+{% for article in articles %}{% include "_article_card.html" %}{% else %}<p>You have not bookmarked any articles yet.</p>{% endfor %}
+</div>{% endblock %}

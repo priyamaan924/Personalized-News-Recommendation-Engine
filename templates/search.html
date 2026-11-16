@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block title %}Search | NewsAI{% endblock %}
+{% block content %}<h1>Search results</h1><p>Results for: {{ query }}</p>
+<div class="grid">{% for article in articles %}{% include "_article_card.html" %}{% else %}<p>No matching articles found.</p>{% endfor %}</div>{% endblock %}

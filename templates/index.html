@@ -1,0 +1,174 @@
+
+{% extends "base.html" %}
+
+{% block title %}NewsAI | Discover What Matters{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="home-hero">
+
+    <div class="hero-content">
+
+        <span class="hero-label">
+            YOUR WORLD. YOUR NEWS.
+        </span>
+
+        <h1>
+            Stay Informed.<br>
+            <span>Stay Ahead.</span>
+        </h1>
+
+        <p>
+            Discover personalized news powered by machine learning.
+            Explore technology, AI, business, science and more,
+            all in one place.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('auth.register') }}" class="button">
+                Get Started →
+            </a>
+
+            <a href="{{ url_for('auth.login') }}" class="hero-login">
+                Login to Account
+            </a>
+
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <h3>AI</h3>
+                <p>Powered Recommendations</p>
+            </div>
+
+            <div>
+                <h3>24/7</h3>
+                <p>News Discovery</p>
+            </div>
+
+            <div>
+                <h3>100%</h3>
+                <p>Personalized Feed</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+        <div class="hero-news-box">
+
+            <span class="tag">NEWSAI PICKS</span>
+
+            <h2>Explore the stories that matter to you.</h2>
+
+            <div class="hero-news-item">
+                <span>🤖</span>
+                <div>
+                    <strong>Artificial Intelligence</strong>
+                    <small>Explore AI developments</small>
+                </div>
+            </div>
+
+            <div class="hero-news-item">
+                <span>💻</span>
+                <div>
+                    <strong>Technology</strong>
+                    <small>Discover new innovations</small>
+                </div>
+            </div>
+
+            <div class="hero-news-item">
+                <span>🔬</span>
+                <div>
+                    <strong>Science</strong>
+                    <small>Explore scientific discoveries</small>
+                </div>
+            </div>
+
+            <div class="hero-news-item">
+                <span>📈</span>
+                <div>
+                    <strong>Business & Finance</strong>
+                    <small>Stay updated with markets</small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+<!-- CATEGORY SECTION -->
+<section class="home-categories">
+
+    <div class="home-section-heading">
+        <span class="eyebrow">EXPLORE YOUR INTERESTS</span>
+        <h2>News for Every Interest</h2>
+        <p>Choose what you love and let NewsAI personalize your experience.</p>
+    </div>
+
+    <div class="home-category-grid">
+
+        <div class="home-category">🤖 <span>Artificial Intelligence</span></div>
+        <div class="home-category">💻 <span>Technology</span></div>
+        <div class="home-category">🔬 <span>Science</span></div>
+        <div class="home-category">📊 <span>Business</span></div>
+        <div class="home-category">💰 <span>Finance</span></div>
+        <div class="home-category">🏆 <span>Sports</span></div>
+        <div class="home-category">🎬 <span>Entertainment</span></div>
+        <div class="home-category">🌍 <span>World News</span></div>
+
+    </div>
+
+</section>
+
+
+<!-- LATEST NEWS SECTION -->
+<section class="home-latest">
+
+    <div class="home-section-heading">
+        <span class="eyebrow">LATEST UPDATES</span>
+        <h2>Latest Headlines</h2>
+        <p>A preview of the latest articles available on NewsAI.</p>
+    </div>
+
+    <div class="news-grid">
+
+        {% for article in articles %}
+
+        {% include "_article_card.html" %}
+
+        {% else %}
+
+        <div class="empty-news">
+            <h3>No headlines available yet.</h3>
+            <p>Register to explore your personalized news feed.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- FINAL CTA -->
+<section class="home-cta">
+
+    <h2>Your News. Your Interests. Your World.</h2>
+
+    <p>
+        Join NewsAI and experience a smarter way
+        to discover information.
+    </p>
+
+    <a href="{{ url_for('auth.register') }}" class="button">
+        Create Free Account →
+    </a>
+
+</section>
+
+{% endblock %}

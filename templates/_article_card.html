@@ -1,0 +1,50 @@
+
+<article class="news-card">
+
+    {% if article.image_url %}
+        <img class="news-image"
+             src="{{ article.image_url }}"
+             alt="News image"
+             loading="lazy"
+             onerror="this.style.display='none'">
+    {% else %}
+        <div class="news-placeholder">NEWSAI</div>
+    {% endif %}
+
+    <div class="news-card-content">
+
+        <span class="tag">
+            {{ article.category.name if article.category else "News" }}
+        </span>
+
+        <h3>
+            <a href="{{ url_for('main.article_detail', article_id=article.id) }}">
+                {{ article.title }}
+            </a>
+        </h3>
+
+        <p>{{ article.description or "Read this latest news story." }}</p>
+
+        <div class="news-meta">
+            {{ article.source }}
+        </div>
+
+        <a class="read-more"
+           href="{{ url_for('main.article_detail', article_id=article.id) }}">
+            Read Article →
+        </a>
+
+        <div class="actions">
+            <form method="post"
+                  action="{{ url_for('main.article_action', article_id=article.id, action='like') }}">
+                <button class="small-btn" type="submit">♥ Like</button>
+            </form>
+
+            <form method="post"
+                  action="{{ url_for('main.article_action', article_id=article.id, action='bookmark') }}">
+                <button class="small-btn" type="submit">☆ Save</button>
+            </form>
+        </div>
+
+    </div>
+</article>

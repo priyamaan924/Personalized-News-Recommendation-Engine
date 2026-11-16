@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Interests | NewsAI{% endblock %}
+{% block content %}
+<div class="form-card wide"><h1>Choose your interests</h1><p>Select topics to personalize your news feed.</p>
+<form method="post"><div class="check-grid">
+{% for category in categories %}<label class="check"><input type="checkbox" name="interests" value="{{ category.id }}" {% if category.id|string in selected %}checked{% endif %}> {{ category.name }}</label>{% endfor %}
+</div><button class="button" type="submit">Save interests</button></form></div>
+{% endblock %}

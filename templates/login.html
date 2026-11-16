@@ -1,0 +1,75 @@
+
+{% extends "base.html" %}
+
+{% block title %}Login | NewsAI{% endblock %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">N</div>
+
+        <span class="auth-label">WELCOME BACK</span>
+
+        <h1>Login to NewsAI</h1>
+
+        <p class="auth-description">
+            Stay informed with news personalized around your interests.
+        </p>
+
+        <form method="POST" action="{{ url_for('auth.login') }}">
+
+            <div class="auth-input">
+                <label for="email">Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="auth-input">
+                <label for="password">Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="auth-button">
+                Login to Account →
+            </button>
+
+        </form>
+
+        <div class="auth-divider">
+            <span>OR</span>
+        </div>
+
+        <p class="auth-footer">
+            Don't have an account?
+            <a href="{{ url_for('auth.register') }}">
+                Create Account
+            </a>
+        </p>
+
+        <div class="auth-bottom">
+            Powered by NewsAI · Personalized News Discovery
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

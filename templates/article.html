@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block title %}{{ article.title }} | NewsAI{%
+endblock %} {% block content %}
+<div class="article-detail">
+  {% if article.image_url %}
+  <img class="detail-image" src="{{ article.image_url }}" alt="News image" />
+  {% endif %}
+
+  <span class="tag">
+    {{ article.category.name if article.category else "News" }}
+  </span>
+
+  <h1>{{ article.title }}</h1>
+
+  <p class="muted">
+    {{ article.source }} · {{ article.published_at.strftime("%d %b %Y") }}
+  </p>
+
+  <p>{{ article.description }}</p>
+  <p>{{ article.content }}</p>
+
+  <form
+    method="POST"
+    action="{{ url_for('main.summarize_article', article_id=article.id) }}"
+  >
+    <button class="button" type="submit">✨ Generate AI Summary</button>
+  </form>
+
+  {% if summary %}
+  <div class="summary-box">
+    <h2>✨ AI News Summary</h2>
+    <div class="summary-text">{{ summary }}</div>
+  </div>
+  {% endif %} {% if article.url %}
+  <a
+    class="button secondary"
+    href="{{ article.url }}"
+    target="_blank"
+    rel="noopener"
+  >
+    Read Original Article ↗
+  </a>
+  {% endif %}
+</div>
+{% endblock %}
